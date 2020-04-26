@@ -20,6 +20,8 @@ namespace BlogsConsole
                 Console.WriteLine("(1) Create a Blog");
                 Console.WriteLine("(2) List All Blogs");
                 Console.WriteLine("(3) Add a Post");
+                Console.WriteLine("(4) Display a Post");
+                Console.WriteLine("(5) Edit a Post");
                 Console.WriteLine("(9) Exit ");
                 keyboard = Console.ReadLine();
                 var db = new BloggingContext();
@@ -42,6 +44,14 @@ namespace BlogsConsole
                     case "3":
                         db.MakeNewPost();
                         break;
+                    case "4":
+                        db.ListPosts();
+                        break;
+                    case "5":
+                        db.EditPosts();
+                        break;
+
+
                 }
 
 

@@ -37,19 +37,66 @@ namespace BlogsConsole.Models
         }
         public void MakeNewPost()
         {
-            string blogID,title, postData;
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+            string title, postData;
+
             Console.WriteLine("Which blog would you like to post to?");
             ListBlogs();
-            blogID = Console.ReadLine();
+            int choice = Int32.Parse(Console.ReadLine());
+            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
+
             Post post = new Post();
             Console.WriteLine("Title of Post:");
             title = Console.ReadLine();
             Console.WriteLine("Post Content:");
             postData = Console.ReadLine();
+
             post.Title = title;
             post.Content = postData;
-            post.BlogId = Int32.Parse(blogID);
+            post.BlogId = blog.BlogId;
             AddPost(post);
+            Console.WriteLine("Here are the posts:");
+            foreach(var item in db.Posts) 
+            {
+                Console.WriteLine("{0,-20}{1,-20}", item.Title, item.Content);
+                Console.WriteLine();
+            }
+        }
+
+        public void ListPosts()
+        {
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+            Console.WriteLine("Which blog would you like to list posts for?");
+            ListBlogs();
+            int choice = Int32.Parse(Console.ReadLine());
+            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
+            //lists posts
+            foreach (var item in db.Posts)
+            {
+                Console.WriteLine("{0,-20}{1,-20}", item.Title, item.Content);
+                Console.WriteLine();
+            }
+
+        }
+        public void EditPosts()
+        {
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+            Console.WriteLine("Which blog would you like to edit posts for?");
+            ListBlogs();
+            int choice = Int32.Parse(Console.ReadLine());
+            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
+
+            Console.WriteLine("Which post would you like to edit?");
+            foreach (var item in db.Posts)
+            {
+                Console.WriteLine("{0,-5}{1,-20}{2,-20}", item.PostId, item.Title, item.Content);
+                Console.WriteLine();
+            }
+            choice = Int32.Parse(Console.ReadLine());
+            
         }
     }
 }
