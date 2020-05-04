@@ -50,6 +50,10 @@ namespace BlogsConsole
                     case "5":
                         db.EditPosts();
                         break;
+                    case "6":
+                        db.DeletePost();
+                        break;
+
 
 
                 }

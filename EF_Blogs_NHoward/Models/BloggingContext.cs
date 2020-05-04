@@ -84,19 +84,38 @@ namespace BlogsConsole.Models
         {
             var db = new BloggingContext();
             var blogs = db.Blogs;
-            Console.WriteLine("Which blog would you like to edit posts for?");
-            ListBlogs();
-            int choice = Int32.Parse(Console.ReadLine());
-            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
 
-            Console.WriteLine("Which post would you like to edit?");
+            Console.WriteLine("Which post would you like to edit? <Title>");
             foreach (var item in db.Posts)
             {
-                Console.WriteLine("{0,-5}{1,-20}{2,-20}", item.PostId, item.Title, item.Content);
+                Console.WriteLine("0,-20}{1,-20}", item.Title, item.Content);
                 Console.WriteLine();
             }
-            choice = Int32.Parse(Console.ReadLine());
-            
+            var choice = Console.ReadLine();
+            var post = db.Posts.FirstOrDefault(b => b.Title == choice);
+            Console.WriteLine("New Post Title: ");
+            post.Title = Console.ReadLine();
+            Console.WriteLine("New Post Content: ");
+            post.Content = Console.ReadLine();
+            db.SaveChanges();
         }
+        public void DeletePost()
+        {
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+
+            Console.WriteLine("Which post would you like to edit? <Title>");
+            foreach (var item in db.Posts)
+            {
+                Console.WriteLine("0,-20}{1,-20}", item.Title, item.Content);
+                Console.WriteLine();
+            }
+            var choice = Console.ReadLine();
+            var post = db.Posts.FirstOrDefault(b => b.Title == choice);
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            Console.WriteLine("Your Post Has Been Deleted");
+        }
+
     }
 }
