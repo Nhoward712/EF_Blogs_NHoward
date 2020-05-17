@@ -81,13 +81,12 @@ namespace BlogsConsole.Models
 
         }
 
-        internal void DeleteBLog()
+        public void DeleteBlog()
         {
             var db = new BloggingContext();
             var blogs = db.Blogs;
 
             Console.WriteLine("Which Blog would you like to delete?");
-            Console.WriteLine("Which post would you like to edit? <Title>");
             foreach (var item in db.Blogs)
             {
                 Console.WriteLine("{0,-10}{1,-20}", item.BlogId, item.Name);
@@ -135,6 +134,27 @@ namespace BlogsConsole.Models
             db.Posts.Remove(post);
             db.SaveChanges();
             Console.WriteLine("Your Post Has Been Deleted");
+        }
+        public void EditBlog()
+        {
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+            Console.WriteLine("Which Blog would you like to edit?");
+            foreach (var item in db.Blogs)
+            {
+                Console.WriteLine("{0,-10}{1,-20}", item.BlogId, item.Name);
+                Console.WriteLine();
+            }
+            int choice = int.Parse(Console.ReadLine());
+            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
+
+            Console.WriteLine("What would you like to rename your blog to?");
+            string title = Console.ReadLine();
+
+            blog.Name = title;
+            db.SaveChanges();
+
+
         }
 
     }

@@ -57,7 +57,7 @@ namespace BlogsConsole
                         db.DeletePost();
                         break;
                     case "7":
-                        db.EditBLog();
+                        db.EditBlog();
                         break;
                     case "8":
                         db.DeleteBlog();
