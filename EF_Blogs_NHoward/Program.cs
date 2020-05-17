@@ -22,6 +22,7 @@ namespace BlogsConsole
                 Console.WriteLine("(3) Add a Post");
                 Console.WriteLine("(4) Display a Post");
                 Console.WriteLine("(5) Edit a Post");
+                Console.WriteLine("(6) Delete a Post");
                 Console.WriteLine("(9) Exit ");
                 keyboard = Console.ReadLine();
                 var db = new BloggingContext();
