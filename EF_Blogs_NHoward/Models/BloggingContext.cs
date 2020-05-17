@@ -80,6 +80,26 @@ namespace BlogsConsole.Models
             }
 
         }
+
+        internal void DeleteBLog()
+        {
+            var db = new BloggingContext();
+            var blogs = db.Blogs;
+
+            Console.WriteLine("Which Blog would you like to delete?");
+            Console.WriteLine("Which post would you like to edit? <Title>");
+            foreach (var item in db.Blogs)
+            {
+                Console.WriteLine("{0,-10}{1,-20}", item.BlogId, item.Name);
+                Console.WriteLine();
+            }
+            int choice = int.Parse(Console.ReadLine());
+            var blog = blogs.FirstOrDefault(b => b.BlogId == choice);
+
+            Blogs.Remove(blog);
+            this.SaveChanges();
+        }
+
         public void EditPosts()
         {
             var db = new BloggingContext();
